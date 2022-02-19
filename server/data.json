@@ -1,0 +1,22 @@
+{
+  "0": {
+    "_id": "1",
+    "first_name": "Linda",
+    "department": "software_engineering",
+    "issue_title": "The page won't load.",
+    "issue_summary": "When I go to the page, it is stuck reloading forever and ever.",
+    "status": "received",
+    "priority": "high",
+    "date": "2-19-2022"
+  },
+  "1": {
+    "_id": "2",
+    "first_name": "Alfonso",
+    "department": "facilities",
+    "issue_title": "toilet won't flush",
+    "issue_summary": "it was working yesterday but now it is broke",
+    "status": "in progress",
+    "priority": "high",
+    "date": "2-19-2022"
+  }
+}
