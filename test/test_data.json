@@ -1,0 +1,22 @@
+{
+  "0": {
+    "_id": 485,
+    "first_name": "Ali",
+    "department": 3,
+    "issue_title": "API route is failing",
+    "issue_summary": "When visiting the 'test' route I am not seeing any data",
+    "status": 2,
+    "priority": 1,
+    "time": "2022-02-19T16:38:58.612Z"
+  },
+  "1": {
+    "_id": 424,
+    "first_name": "Linda",
+    "department": 1,
+    "issue_title": "Page won't load",
+    "issue_summary": "The homepage is just loading forever and ever",
+    "status": 2,
+    "priority": 3,
+    "time": "2022-02-19T16:38:58.612Z"
+  }
+}
