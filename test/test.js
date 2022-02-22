@@ -21,6 +21,7 @@ describe('Route integration', () => {
   });
 
   describe('/add', () => {
+    // bring newTicket variable up here to make the code cleaner
     describe('POST', () => {
       it('responds with 200 status and text/plain content type', () => {
         const newTicket = {
