@@ -51,7 +51,11 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(process.env.PORT, process.env.HOST, () =>
+// app.listen(process.env.PORT, process.env.HOST, () =>
+//   console.log(`Server running on ${process.env.HOST}:${process.env.PORT}`)
+// );
+
+app.listen(3000, () =>
   console.log(`Server running on ${process.env.HOST}:${process.env.PORT}`)
 );
 
