@@ -8,7 +8,7 @@ const TicketContainer = (props) => {
 
   //const [ ticketPriority, sortTickets ] = useState([])
 
-
+  // NOTE: TicketContainer contains all tickets
   return (
     <div className='ticket-list'>
       <div className='columns' id='high-priority'>
