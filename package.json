@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Team-Kala/red-lipped-bat-fish#readme",
   "jest": {
+    "verbose": true,
     "globalSetup": "./jest-setup.js",
     "globalTeardown": "./jest-teardown.js",
     "testEnvironment": "jest-environment-jsdom",

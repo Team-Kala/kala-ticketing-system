@@ -33,11 +33,13 @@ ticketController.addTicket = (req, res, next) => {
     issue_summary,
     priority,
   } = req.body;
+
   const status = 1;
   const date = new Date();
 
   const query =
     'INSERT INTO ticket_table (first_name, department, issue_title, issue_summary, status, priority, date) VALUES ($1, $2, $3, $4, $5, $6, $7);';
+  
   const values = [
     first_name,
     department,
@@ -49,8 +51,8 @@ ticketController.addTicket = (req, res, next) => {
   ];
 
   db.query(query, values)
-    .then((data) => {
-      next();
+    .then(data => {
+      return next();
     })
     .catch((err) => {
       return next({
@@ -66,13 +68,14 @@ ticketController.removeTicket = (req, res, next) => {
   const ticketId = req.body._id;
   const thisQuery = 'DELETE FROM ticket_table WHERE _id = $1';
   const values = [ticketId];
-  console.log('REQ BODY ID:', req.body._id)
+  console.log('REQ BODY ID aka ticketId: ', req.body._id)
   db.query(thisQuery, values)
-    .then((data) => {
-      next();
+    .then(data => {
+      console.log('res IS: ', data)
+      return next();
     })
     .catch((err) => {
-      next({
+      return next({
         log: `ticketController.removeTicket: ERROR: ${err}`,
         message: {
           err: 'ticketController.removeTicket: ERROR: Check server logs for details',
