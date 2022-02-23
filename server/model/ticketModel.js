@@ -45,7 +45,11 @@ const pool = new Pool({
 
 module.exports = {
   query: (text, params, callback) => {
-    console.log('executed query', text);
+    // console.log('executed query', text);
+    // console.log('Test:', text, params, callback);
+    console.log(`This is our text`, text);
+    console.log(`This is our params`, params);
+    console.log(`This is our callback`, callback);
     return pool.query(text, params, callback);
   }
 };
