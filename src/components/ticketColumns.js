@@ -4,12 +4,12 @@ import Ticket from '../components/tickets';
 
 
 
-const TicketColumn = ({ dropColumn, info, setTickets }) => {
+const TicketColumn = ({ dropColumn, info, setTickets, colors }) => {
 
   return (
     <Droppable droppableId={dropColumn}>
       {(provided) => (
-        <div className='columns' {...provided.droppableProps} ref={provided.innerRef}>
+        <div className='columns' {...provided.droppableProps} ref={provided.innerRef} style={{borderRadius: '5px'}}>
           {info.map((el, index) => (
             <Ticket
               key={el._id}
@@ -18,6 +18,7 @@ const TicketColumn = ({ dropColumn, info, setTickets }) => {
               setTickets={setTickets}
               tickets={el}
               index={index}
+              colors={colors}
             />
           ))}
           {provided.placeholder}

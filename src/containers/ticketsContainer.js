@@ -139,7 +139,7 @@ const TicketContainer = (props) => {
     <DragDropContext onDragEnd={onDragEndHandler}>
       <div className='ticket-list'>
         {Object.values(columns).map((col, index) => (
-          <TicketColumn key={index} info={col.list} dropColumn={col.id} setTickets={setTickets}/>
+          <TicketColumn key={index} info={col.list} dropColumn={col.id} setTickets={setTickets} colors={props.colors}/>
         ))}
       </div>
     </DragDropContext>
