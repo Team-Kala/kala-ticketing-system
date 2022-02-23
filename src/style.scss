@@ -1,0 +1,58 @@
+#logo{
+    height:5vh
+}
+
+#navBar{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#navBar button{
+    margin: 10px;
+}
+
+#submit-ticket{
+    text-align: right;
+}
+
+#form-container{
+    width: 50%;
+    padding-top: 20px
+}
+
+.ticket-list {
+  display: flex;
+}
+
+.columns {
+  flex: 1;
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: solid 0.25px;
+}
+
+.ticketDetailList {
+  list-style: none;
+}
+
+.ticketCard {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 20px 5px;
+}
+
+.ticketHead {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete {
+  border: none;
+  border-radius: 5px;
+}
+
+label {
+  font-weight: 800;
+  font-size: 17px
+}
