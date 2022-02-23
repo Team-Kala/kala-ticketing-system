@@ -24,4 +24,21 @@ const TicketContainer = (props) => {
   );
 }
 
+
+// STRETCH: Toggle between different sorting options priority & department
+// return (
+//   <div className='ticket-list'>
+//     <div className='columns' id='department - software'>
+//       <TicketColumn priority='high' />
+//     </div>
+//     <div className='columns' id='department - facilities'>
+//       <TicketColumn priority='medium' />
+//     </div>
+//     <div className='columns' id='department - marketing'>
+//       <TicketColumn priority='low' />
+//     </div>
+//   </div>
+// );
+
+
 export default TicketContainer;
