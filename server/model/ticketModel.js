@@ -13,7 +13,7 @@ const pool = new Pool({
 });
 
 // // connection of database with the following schema: 
-// CREATE TABLE ticket_Table (
+// CREATE TABLE ticket_table (
 //   _id       SERIAL PRIMARY KEY,
 //   first_name     VARCHAR(50),
 //   department_id  INTEGER, REFERENCES department_table(_id),
