@@ -43,12 +43,11 @@ describe('Route integration', () => {
         return await request(server)
           .post('/add')
           .send([newTicket])
-          // .set('Content-Type', 'text/plain; charset=utf-8')
-          .expect('Content-Type', 'text/plain; charset=utf-8')
-          // .then(response => {
+          .expect('Content-Type', 'application/json')
+          .then(response => {
             expect(response.status).toBe(200);
           });
-      // });
+      });
 
       it('responds with the updated ticket list', async () => {
         return await request(server)
