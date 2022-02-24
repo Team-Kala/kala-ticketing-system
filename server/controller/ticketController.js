@@ -80,4 +80,26 @@ ticketController.removeTicket = (req, res, next) => {
       });
     });
 };
+
+// NOTE: Redone by Leo - might have errors
+ticketController.updatePriority = (req, res, next) => {
+  const {_id, priority_id} = req.body;
+  const values = [_id, priority_id];
+  console.log(`getting into updatePriority`)
+  const thisQuery = 'UPDATE ticket_table SET priority_id=$2 WHERE _id=$1';
+  db.query(thisQuery, values)
+  .then((data) => {
+    next();
+  })
+  .catch((err) => {
+    next({
+      log: `ticketController.updatePriority: ERROR: ${err}`,
+      message: {
+        err: 'ticketController.updatePriority: ERROR: Check server logs for details',
+      },
+    })
+  })
+};
+
+
 module.exports = ticketController;
