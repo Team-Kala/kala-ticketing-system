@@ -68,10 +68,10 @@ ticketController.removeTicket = (req, res, next) => {
   const ticketId = req.body._id;
   const thisQuery = 'DELETE FROM ticket_table WHERE _id = $1';
   const values = [ticketId];
-  console.log('REQ BODY ID aka ticketId: ', req.body._id)
+  // console.log('REQ BODY ID aka ticketId: ', req.body._id)
   db.query(thisQuery, values)
     .then(data => {
-      console.log('res IS: ', data)
+      // console.log('res IS: ', data)
       return next();
     })
     .catch((err) => {

@@ -15,8 +15,9 @@ router.post('/add',
   ticketController.addTicket,
   ticketController.getTickets,
   (req, res) => {
-    console.log(res.locals.tickets)
-    res.status(200).json(res.locals.tickets);
+    res.status(200)
+    // console.log('res.status is: ', res.status)
+    res.json(res.locals.tickets);
   }
 );
 
@@ -24,7 +25,7 @@ router.delete('/remove',
   ticketController.removeTicket,
   ticketController.getTickets,
   (req, res) => {
-    console.log(res);
+    // console.log(res);
     res.sendStatus(504);
   }
 );

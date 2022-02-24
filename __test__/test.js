@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime';
 const request = require('supertest');
 const fs = require('fs');
 const path = require('path');
-const testJsonFile = path.resolve(__dirname, '../test/test_data.json');
+const testJsonFile = path.resolve(__dirname, '../__test__/test_data_testfile.json');
 const server = 'http://localhost:3000';
 
 describe('Route integration', () => {
@@ -43,10 +43,9 @@ describe('Route integration', () => {
         return await request(server)
           .post('/add')
           .send([newTicket])
-          .expect('Content-Type', 'application/json')
-          .then(response => {
-            expect(response.status).toBe(200);
-          });
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /application\/json/)
+          .expect(200);
       });
 
       it('responds with the updated ticket list', async () => {
