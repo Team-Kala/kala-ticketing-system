@@ -56,9 +56,9 @@ const TicketForm = (props) => {
             <br></br>
               <select className="form-control" required onChange={(e => setDepartment(e.target.value))}>
                 <option value="">Choose a department</option>
-                <option value='2'>Software Engineering</option>
+                <option value='1'>Software Engineering</option>
                 <option value='3'>Facilities</option>
-                <option value='1'>Marketing</option>
+                <option value='2'>Marketing</option>
               </select>
           </div>
         </div>

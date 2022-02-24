@@ -89,6 +89,7 @@ ticketController.updatePriority = (req, res, next) => {
   const thisQuery = 'UPDATE ticket_table SET priority_id=$2 WHERE _id=$1';
   db.query(thisQuery, values)
   .then((data) => {
+    res.locals.priority = data.rows[0]
     next();
   })
   .catch((err) => {
