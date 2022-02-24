@@ -1,9 +1,10 @@
 const { Pool } = require('pg');
 
+const PG_URI = 'postgres://cugmbtqo:tpTajooh4bqzTtz0SYqSYGDOirIV6Z4S@jelani.db.elephantsql.com/cugmbtqo'
 
-const PG_URI = process.env.NODE_ENV === 'test' 
-? 'postgres://nwnaxssy:0nNwwEItIdpg8c1eBjzTNarTzg7Y24gU@jelani.db.elephantsql.com/nwnaxssy'
-: 'postgres://kczfawhr:eZaID_V87sos32FnYX4_CNmwh8srUPKY@jelani.db.elephantsql.com/kczfawhr';
+// const PG_URI = process.env.NODE_ENV === 'test' 
+// ? 'postgres://nwnaxssy:0nNwwEItIdpg8c1eBjzTNarTzg7Y24gU@jelani.db.elephantsql.com/nwnaxssy'
+// : 'postgres://kczfawhr:eZaID_V87sos32FnYX4_CNmwh8srUPKY@jelani.db.elephantsql.com/kczfawhr';
 
 
 // create a new pool here using the connection string above
@@ -12,7 +13,7 @@ const pool = new Pool({
 });
 
 // // connection of database with the following schema: 
-// CREATE TABLE ticket_Table (
+// CREATE TABLE ticket_table (
 //   _id       SERIAL PRIMARY KEY,
 //   first_name     VARCHAR(50),
 //   department_id  INTEGER, REFERENCES department_table(_id),
@@ -45,6 +46,10 @@ const pool = new Pool({
 module.exports = {
   query: (text, params, callback) => {
     // console.log('executed query', text);
+    // console.log('Test:', text, params, callback);
+    console.log(`This is our text`, text);
+    console.log(`This is our params`, params);
+    console.log(`This is our callback`, callback);
     return pool.query(text, params, callback);
   }
 };

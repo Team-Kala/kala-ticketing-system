@@ -5,7 +5,6 @@
 #navBar{
     padding-left: 20px;
     padding-right: 20px;
-    background-color: #ACC4B0 !important;
 }
 
 #navBar button{
@@ -35,8 +34,12 @@
 
 .ticketDetailList {
   list-style: none;
-  border: solid 0.25px;
+}
+
+.ticketCard {
   border-radius: 10px;
+  padding: 5px;
+  margin: 20px 5px;
 }
 
 .ticketHead {
@@ -47,4 +50,9 @@
 .delete {
   border: none;
   border-radius: 5px;
+}
+
+label {
+  font-weight: 800;
+  font-size: 17px
 }
