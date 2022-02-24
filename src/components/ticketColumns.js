@@ -10,6 +10,7 @@ const TicketColumn = ({ dropColumn, info, setTickets, colors }) => {
     <Droppable droppableId={dropColumn}>
       {(provided) => (
         <div className='columns' {...provided.droppableProps} ref={provided.innerRef} style={{borderRadius: '5px'}}>
+          <h2>{dropColumn}</h2>
           {info.map((el, index) => (
             <Ticket
               key={el._id}
@@ -19,6 +20,7 @@ const TicketColumn = ({ dropColumn, info, setTickets, colors }) => {
               tickets={el}
               index={index}
               colors={colors}
+              priority={dropColumn}
             />
           ))}
           {provided.placeholder}
