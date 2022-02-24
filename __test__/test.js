@@ -18,6 +18,7 @@ describe('Route integration', () => {
       it('responds with 200 status and text/html content type', async () => {
         return await request(server)
           .get('/')
+          .set('Content-Type', 'text/html')
           .expect('Content-Type', /text\/html/)
           .expect(200);
       });
@@ -38,15 +39,16 @@ describe('Route integration', () => {
       // database tests are asynchronous so we need to use async await functionality in tests
       // however to use async await we need to make sure we use 'regenerator-runtime/runtime' in webpack
       // as well as install 
-      it('responds with 404 status and text/plain content type', async () => {
+      it('responds with 200 status and text/plain content type', async () => {
         return await request(server)
           .post('/add')
           .send([newTicket])
-          .expect('Content-Type', /text\/plain/)
-          .then(response => {
+          // .set('Content-Type', 'text/plain; charset=utf-8')
+          .expect('Content-Type', 'text/plain; charset=utf-8')
+          // .then(response => {
             expect(response.status).toBe(200);
           });
-      });
+      // });
 
       it('responds with the updated ticket list', async () => {
         return await request(server)
@@ -59,7 +61,7 @@ describe('Route integration', () => {
     });
 
     describe('DELETE', () => {
-      it('responds with 202 status', async () => {
+      it('responds with 404 status', async () => {
         const response = await request(server)
           .del('/remove')
           .expect('Content-Type', 'text/plain; charset=utf-8')
