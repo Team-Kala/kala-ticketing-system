@@ -4,16 +4,16 @@ import TicketColumn from '../components/ticketColumns'
 import { DragDropContext } from 'react-beautiful-dnd';
 
 const initialColumns = {
-  high: {
-    id: 'high',
+  High: {
+    id: 'High',
     list: []
   },
-  med: {
-    id: 'med',
+  Medium: {
+    id: 'Medium',
     list: []
   },
-  low: {
-    id: 'low',
+  Low: {
+    id: 'Low',
     list: []
   }
 }
@@ -47,16 +47,16 @@ const TicketContainer = (props) => {
 
   useEffect(() => {
     setColumns({
-      high: {
-        id: 'high',
+      High: {
+        id: 'High',
         list: highPriority
       },
-      med: {
-        id: 'med',
+      Medium: {
+        id: 'Medium',
         list: mediumPriority
       },
-      low: {
-        id: 'low',
+      Low: {
+        id: 'Low',
         list: lowPriority
       }})
   }, [tickets])

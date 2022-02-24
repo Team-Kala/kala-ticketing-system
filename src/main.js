@@ -4,12 +4,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 // import Header from './containers/headerContainer';
 import LogoHeader from './components/logoHeader';
 import TicketContainer from './containers/ticketsContainer';
-import TicketForm from './components/modal';
-import './style.scss'
+import TicketForm from './components/TicketForm';
+import './style.css'
 
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
   const darkModeHandler = () => {
     setDarkMode(!darkMode)

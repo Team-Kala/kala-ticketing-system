@@ -67,7 +67,8 @@ const LogoHeader = ({darkSwitch, colors}) => {
           <MaterialUISwitch
           sx={{ m: 1 }} 
           onClick={darkSwitch}
-          defaultChecked />
+          defaultChecked 
+          />
         </div>
       </nav>
     )
