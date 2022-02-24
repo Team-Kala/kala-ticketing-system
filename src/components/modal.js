@@ -55,11 +55,10 @@ const TicketForm = (props) => {
             <label htmlFor='enter-department'>Department</label>
             <br></br>
               <select className="form-control" required onChange={(e => setDepartment(e.target.value))}>
-                {/* Adjusted settings for departments */}
                 <option value="">Choose a department</option>
-                <option value='1'>Software Engineering</option>
+                <option value='2'>Software Engineering</option>
                 <option value='3'>Facilities</option>
-                <option value='2'>Marketing</option>
+                <option value='1'>Marketing</option>
               </select>
           </div>
         </div>

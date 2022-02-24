@@ -27,6 +27,4 @@ router.delete(
   }
 );
 
-// router.put
-
 module.exports = router;

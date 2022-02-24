@@ -7,10 +7,9 @@ const ticketController = {};
 
 
 ticketController.getTickets = (req, res, next) => {
-  const query = 
+  const query =
     'SELECT tt._id, tt.first_name, dt.name AS department, tt.issue_title, tt.issue_summary, st.name AS status, pt.name AS priority, tt.date FROM ticket_table AS tt JOIN department_table AS dt ON tt.department_id= dt._id JOIN status_table AS st ON tt.status_id=st._id JOIN priority_table AS pt ON tt.priority_id=pt._id;';
 
-    // sending a query to the database
   db.query(query)
     .then((response) => {
       res.locals.tickets = response.rows;
@@ -38,7 +37,6 @@ ticketController.addTicket = (req, res, next) => {
   const date = new Date();
 
   const query =
-  // NOTE: Maybe order DOES matter
     'INSERT INTO ticket_table (first_name, department_id, issue_title, issue_summary, status_id, priority_id, date) VALUES ($1, $2, $3, $4, $5, $6, $7);';
   const values = [
     first_name,
@@ -56,7 +54,7 @@ ticketController.addTicket = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: `ticketController.addTicket: ERROR: ${err}`,
+        log: `ticketController.addTicket: ERROR: THIS IS OUR ERRORRRRRRRR ${err}`,
         message: {
           err: 'ticketController.addTicket: ERROR: Check server logs for details',
         },
@@ -82,8 +80,4 @@ ticketController.removeTicket = (req, res, next) => {
       });
     });
 };
-
-// add middleware for update
-
-
 module.exports = ticketController;
