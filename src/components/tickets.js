@@ -19,8 +19,6 @@ const Ticket = (props) => {
       .catch((err) => console.log('Error deleting ticket', err));
   };
 
-  // const cardColor = (props.colors.card);
-
   return (
     <Draggable key={props.index} draggableId={`${props.ticketID}${props.index}`} index={props.index}>
       {(provided) => (
@@ -30,7 +28,7 @@ const Ticket = (props) => {
           <article className='ticketCard' style={{ backgroundColor: props.colors.card, color: props.colors.font}} >
             <div className='ticketHead'>
               <div className='ticket-title'>
-                <h4 style={{ color: props.colors.titleFont, fontWeight:'800'}} >{props.ticket.issue_title}</h4>
+                <h4 style={{ color: props.colors.titleFont, fontWeight:'800', paddingLeft:'30px'}} >{props.ticket.issue_title}</h4>
               </div>
               <div className='delete-button'>
                 <button className='delete' onClick={handleDelete}>
@@ -47,7 +45,7 @@ const Ticket = (props) => {
                 <li className='ticketDetail'>
                   <label>Department</label>: {props.ticket.department}
                 </li>
-                <li className='ticketDetail'><label>Priority</label>: {props.ticket.priority}</li>
+                <li className='ticketDetail'><label>Priority</label>: {props.priority}</li>
                 <li className='ticketDetail'><label>Status</label>: {props.ticket.status}</li>
                 <li className='ticketDetail'><label>Date</label>: {props.ticket.date}</li>
               </ul>

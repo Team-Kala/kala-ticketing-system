@@ -4,16 +4,16 @@ import TicketColumn from '../components/ticketColumns'
 import { DragDropContext } from 'react-beautiful-dnd';
 
 const initialColumns = {
-  high: {
-    id: 'high',
+  High: {
+    id: 'High',
     list: []
   },
-  med: {
-    id: 'med',
+  Medium: {
+    id: 'Medium',
     list: []
   },
-  low: {
-    id: 'low',
+  Low: {
+    id: 'Low',
     list: []
   }
 }
@@ -34,28 +34,32 @@ const TicketContainer = (props) => {
     fetchTickets();
   }, []);
 
-  const highPriority = tickets.filter((ticket) => ticket.priority === "high");
-  const mediumPriority = tickets.filter(
-    (ticket) => ticket.priority === "medium"
+  const highPriority = tickets.filter(
+    (ticket) => ticket.priority.toLowerCase() === 'high'
   );
-  const lowPriority = tickets.filter((ticket) => ticket.priority === "low");
+  const mediumPriority = tickets.filter(
+    (ticket) => ticket.priority.toLowerCase() === 'medium'
+  );
+  const lowPriority = tickets.filter(
+    (ticket) => ticket.priority.toLowerCase() === 'low'
+  );
 
   useEffect(() => {
     setColumns({
-      high: {
-        id: "high",
-        list: highPriority,
+      High: {
+        id: 'High',
+        list: highPriority
       },
-      med: {
-        id: "med",
-        list: mediumPriority,
+      Medium: {
+        id: 'Medium',
+        list: mediumPriority
       },
-      low: {
-        id: "low",
-        list: lowPriority,
-      },
-    });
-  }, [tickets]);
+      Low: {
+        id: 'Low',
+        list: lowPriority
+      }
+    })
+  }, [tickets])
 
   const onDragEndHandler = ({ source, destination }) => {
     // console.log('source ', source);
@@ -73,10 +77,10 @@ const TicketContainer = (props) => {
       return null;
 
     // Set start and end variables
-    const start = columns[source.droppableId];
-    const end = columns[destination.droppableId];
-    console.log("start ", start);
-    console.log("end ", end);
+    const start = columns[source.droppableId]
+    const end = columns[destination.droppableId]
+    // console.log('start ', start);
+    // console.log('end ', end);
 
     // If start is the same as end, we're in the same column
     if (start === end) {
@@ -119,6 +123,32 @@ const TicketContainer = (props) => {
         list: newEndList,
       };
 
+
+      let priorityId;
+      if (end.id === 'High') {
+        priorityId = 3
+      } else if (end.id === 'Medium') {
+        priorityId = 2
+      } else if (end.id === 'Low') {
+        priorityId = 1
+      }
+
+      //updates DB
+      const body = { _id: start.list[source.index]._id, priority_id: priorityId }
+      console.log(body);
+      fetch('/api/update', {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "Application/JSON",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((res) => console.log('Success!'))
+        .catch((err) => console.log(err))
+
+      //changes the priority in state(maintains the order unless refreshed)
+      newEndCol.list[destination.index].priority = end.id
+
       // Update the state
       return setColumns((state) => ({
         ...state,
@@ -127,22 +157,6 @@ const TicketContainer = (props) => {
       }));
     }
   };
-
-  //updates DB
-  const body = { id: start.list[source.index]._id, priority_id: priorityId };
-  console.log(body);
-  fetch("/api", {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "Application/JSON",
-    },
-    body: JSON.stringify(body),
-  })
-    .then((res) => console.log("Success!"))
-    .catch((err) => console.log(err));
-
-  //changes the priority in state(maintains the order unless refreshed)
-  newEndCol.list[destination.index].priority = end.id;
 
   return (
     <DragDropContext onDragEnd={onDragEndHandler}>
