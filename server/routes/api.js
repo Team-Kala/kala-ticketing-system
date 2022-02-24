@@ -30,6 +30,14 @@ router.delete('/remove',
   }
 );
 
-// router.put
+// NOTE: Redone by Leo - might have errors
+router.patch(
+  '/update',
+  ticketController.updatePriority,
+  ticketController.getTickets,
+  (req, res) => {
+    res.status(200).json(res.locals.tickets)
+  }
+);
 
 module.exports = router;
