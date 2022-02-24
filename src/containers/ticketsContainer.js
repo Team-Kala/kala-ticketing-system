@@ -19,16 +19,15 @@ const initialColumns = {
 }
 const TicketContainer = (props) => {
   const [tickets, setTickets] = useState([]);
-  const [columns, setColumns] = useState(initialColumns)
-
+  const [columns, setColumns] = useState(initialColumns);
 
   const fetchTickets = () => {
-    fetch('/api')
+    fetch("/api")
       .then((res) => res.json())
       .then((tickets) => {
-        setTickets(tickets)
+        setTickets(tickets);
       })
-      .catch((err) => console.log('Error getting tickets.', err));
+      .catch((err) => console.log("Error getting tickets.", err));
   };
 
   useEffect(() => {
@@ -58,7 +57,8 @@ const TicketContainer = (props) => {
       Low: {
         id: 'Low',
         list: lowPriority
-      }})
+      }
+    })
   }, [tickets])
 
   const onDragEndHandler = ({ source, destination }) => {
@@ -66,7 +66,7 @@ const TicketContainer = (props) => {
     // console.log('destination ', destination);
 
     // Make sure we have a valid destination
-    if (destination === undefined || destination === null) return null
+    if (destination === undefined || destination === null) return null;
 
     // If the source and destination columns are the same
     // AND if the index is the same, the item isn't moving
@@ -74,7 +74,7 @@ const TicketContainer = (props) => {
       source.droppableId === destination.droppableId &&
       destination.index === source.index
     )
-      return null
+      return null;
 
     // Set start and end variables
     const start = columns[source.droppableId]
@@ -86,86 +86,89 @@ const TicketContainer = (props) => {
     if (start === end) {
       // Move the item within the list
       // Start by making a new list without the dragged item
-      const newList = start.list.filter(
-        (_, idx) => idx !== source.index
-      )
+      const newList = start.list.filter((_, idx) => idx !== source.index);
 
       // Then insert the item at the right location
-      newList.splice(destination.index, 0, start.list[source.index])
+      newList.splice(destination.index, 0, start.list[source.index]);
 
       // Then create a new copy of the column object
       const newCol = {
         id: start.id,
-        list: newList
-      }
+        list: newList,
+      };
 
       // Update the state
-      return setColumns(state => ({ ...state, [newCol.id]: newCol }))
+      return setColumns((state) => ({ ...state, [newCol.id]: newCol }));
       // return null
     } else {
       // If start is different from end, we need to update multiple columns
       // Filter the start list like before
-      const newStartList = start.list.filter(
-        (_, idx) => idx !== source.index
-      )
+      const newStartList = start.list.filter((_, idx) => idx !== source.index);
 
       // Create a new start column
       const newStartCol = {
         id: start.id,
-        list: newStartList
-      }
+        list: newStartList,
+      };
 
       // Make a new end list array
-      const newEndList = end.list
+      const newEndList = end.list;
 
       // Insert the item into the end list
-      newEndList.splice(destination.index, 0, start.list[source.index])
+      newEndList.splice(destination.index, 0, start.list[source.index]);
 
       // Create a new end column
       const newEndCol = {
         id: end.id,
-        list: newEndList
-      }
+        list: newEndList,
+      };
 
-      
+
       let priorityId;
-      if(end.id === 'High') {
+      if (end.id === 'High') {
         priorityId = 3
-      } else if (end.id === 'Medium'){
+      } else if (end.id === 'Medium') {
         priorityId = 2
-      } else if (end.id === 'Low') { 
+      } else if (end.id === 'Low') {
         priorityId = 1
       }
 
       //updates DB
       const body = { _id: start.list[source.index]._id, priority_id: priorityId }
       console.log(body);
-    fetch('/api/update', {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "Application/JSON",
-      },
-      body: JSON.stringify(body),
-    })
-    .then((res) => console.log('Success!'))
-    .catch((err) => console.log(err))
+      fetch('/api/update', {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "Application/JSON",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((res) => console.log('Success!'))
+        .catch((err) => console.log(err))
 
-    //changes the priority in state(maintains the order unless refreshed)
-    newEndCol.list[destination.index].priority = end.id
+      //changes the priority in state(maintains the order unless refreshed)
+      newEndCol.list[destination.index].priority = end.id
 
       // Update the state
-      return setColumns(state => ({
+      return setColumns((state) => ({
         ...state,
         [newStartCol.id]: newStartCol,
-        [newEndCol.id]: newEndCol
-      }))
+        [newEndCol.id]: newEndCol,
+      }));
     }
-  }
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEndHandler}>
-      <div className='ticket-list'>
+      <div className="ticket-list">
         {Object.values(columns).map((col, index) => (
-          <TicketColumn key={index} info={col.list} dropColumn={col.id} setTickets={setTickets} colors={props.colors}/>
+          <TicketColumn
+            key={index}
+            info={col.list}
+            dropColumn={col.id}
+            setTickets={setTickets}
+            colors={props.colors}
+          />
         ))}
       </div>
     </DragDropContext>
