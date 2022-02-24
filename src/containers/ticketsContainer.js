@@ -36,13 +36,13 @@ const TicketContainer = (props) => {
   }, []);
 
   const highPriority = tickets.filter(
-    (ticket) => ticket.priority === 'high'
+    (ticket) => ticket.priority.toLowerCase() === 'high'
   );
   const mediumPriority = tickets.filter(
-    (ticket) => ticket.priority === 'medium'
+    (ticket) => ticket.priority.toLowerCase() === 'medium'
   );
   const lowPriority = tickets.filter(
-    (ticket) => ticket.priority === 'low'
+    (ticket) => ticket.priority.toLowerCase() === 'low'
   );
 
   useEffect(() => {
@@ -79,8 +79,8 @@ const TicketContainer = (props) => {
     // Set start and end variables
     const start = columns[source.droppableId]
     const end = columns[destination.droppableId]
-    console.log('start ', start);
-    console.log('end ', end);
+    // console.log('start ', start);
+    // console.log('end ', end);
 
     // If start is the same as end, we're in the same column
     if (start === end) {
@@ -126,6 +126,32 @@ const TicketContainer = (props) => {
         id: end.id,
         list: newEndList
       }
+
+      
+      let priorityId;
+      if(end.id === 'High') {
+        priorityId = 3
+      } else if (end.id === 'Medium'){
+        priorityId = 2
+      } else if (end.id === 'Low') { 
+        priorityId = 1
+      }
+
+      //updates DB
+      const body = { _id: start.list[source.index]._id, priority_id: priorityId }
+      console.log(body);
+    fetch('/api/update', {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "Application/JSON",
+      },
+      body: JSON.stringify(body),
+    })
+    .then((res) => console.log('Success!'))
+    .catch((err) => console.log(err))
+
+    //changes the priority in state(maintains the order unless refreshed)
+    newEndCol.list[destination.index].priority = end.id
 
       // Update the state
       return setColumns(state => ({

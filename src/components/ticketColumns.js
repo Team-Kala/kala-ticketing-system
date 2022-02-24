@@ -20,7 +20,7 @@ const TicketColumn = ({ dropColumn, info, setTickets, colors }) => {
               tickets={el}
               index={index}
               colors={colors}
-              piority={dropColumn}
+              priority={dropColumn}
             />
           ))}
           {provided.placeholder}

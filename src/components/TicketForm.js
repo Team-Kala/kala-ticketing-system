@@ -41,7 +41,6 @@ const TicketForm = (props) => {
   }
 
   return (
-    <div className='ticketForm'>
       <div className='container' id='form-container'>
         <h2>Ticket Entry Form</h2>
         <form onSubmit={submitTicket}>
@@ -56,10 +55,11 @@ const TicketForm = (props) => {
               <label htmlFor='enter-department'>Department</label>
               <br></br>
               <select className="form-control" required onChange={(e => setDepartment(e.target.value))}>
+                {/* Adjusted settings for departments */}
                 <option value="">Choose a department</option>
-                <option value='2'>Software Engineering</option>
+                <option value='1'>Software Engineering</option>
                 <option value='3'>Facilities</option>
-                <option value='1'>Marketing</option>
+                <option value='2'>Marketing</option>
               </select>
             </div>
           </div>
@@ -92,7 +92,6 @@ const TicketForm = (props) => {
           </div>
         </form>
       </div>
-    </div>
   )
 }
 

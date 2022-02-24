@@ -25,9 +25,11 @@
       padding-top: 20px
     }
 
-    /* .ticketForm {
+    .ticketForm {
       display: flex;
-    } */
+      flex: 1;
+    }
+
     .ticket-list {
       display: flex;
     }
@@ -63,4 +65,67 @@
     label {
       font-weight: 800;
       font-size: 17px
+    }
+
+    .signupForm {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 50px 0px;
+    }
+
+    .signupLabel {
+      font-family: sans-serif;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-size: .8em;
+      color: #000;
+    }
+
+    .signupInput[type=text] {
+      display: inline-block;
+      border: none;
+      text-align: left;
+      box-shadow: 3px 2px rgba(169, 169, 169, 1);
+      padding: 10px;
+      width: 350px;
+      margin: 10px 0;
+      background: transparent;
+      color: #000;
+    }
+
+    .signupInput[type=password] {
+      display: inline-block;
+      border: none;
+      text-align: left;
+      box-shadow: 3px 2px rgba(169, 169, 169, 1);
+      padding: 10px;
+      width: 350px;
+      margin: 10px 0;
+      background: transparent;
+      color: #000;
+    }
+
+    .signupInput[type=text]:focus {
+      background: none;
+      border: none;
+      color: #000;
+    }
+
+    .signupBtn {
+      background: transparent;
+      color: #000;
+      font-family: sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin: 20px 0;
+      padding: 10px 30px;
+      border: 2px solid rgba(169, 169, 169, .5);
+    }
+
+    .signupBtn:hover {
+      background: transparent;
+      border: 2px solid rgba(169, 169, 169, 1);
+      cursor: pointer;
     }
