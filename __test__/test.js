@@ -25,7 +25,7 @@ describe('Route integration', () => {
     });
   });
 
-  describe('/add', () => {
+  describe('/api/add', () => {
     // bring newTicket variable up here to make the code cleaner
     const newTicket = {
       first_name: 'Nehreen',
@@ -41,16 +41,16 @@ describe('Route integration', () => {
       // as well as install 
       it('responds with 200 status and text/plain content type', async () => {
         return await request(server)
-          .post('/add')
+          .post('/api/add')
+          // .set('Accept', 'application/json')
           .send([newTicket])
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /application\/json/)
+          .expect('Content-Type', 'application/json; charset=utf-8')
           .expect(200);
       });
 
       it('responds with the updated ticket list', async () => {
         return await request(server)
-          .post('/add')
+          .post('/api/add')
           .send()
           .then((response) => {
             expect(response.body).toBeDefined();

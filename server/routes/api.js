@@ -26,7 +26,7 @@ router.delete('/remove',
   ticketController.getTickets,
   (req, res) => {
     // console.log(res);
-    res.sendStatus(504);
+    res.sendStatus(404);
   }
 );
 
