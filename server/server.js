@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 const path = require('path');
+const PORT = 3000;
 
 // import routers 
 const apiRouter = require('./routes/api.js');
@@ -51,8 +52,12 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(process.env.PORT, process.env.HOST, () =>
+// app.listen(process.env.PORT, process.env.HOST, () =>
+//   console.log(`Server running on ${process.env.HOST}:${process.env.PORT}`)
+// );
+
+const server = app.listen(PORT, () =>
   console.log(`Server running on ${process.env.HOST}:${process.env.PORT}`)
 );
 
-module.exports = app;
+module.exports = server;

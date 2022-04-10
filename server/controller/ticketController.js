@@ -8,7 +8,7 @@ const ticketController = {};
 
 ticketController.getTickets = (req, res, next) => {
   const query =
-    'SELECT tt._id, tt.first_name, dt.name AS department, tt.issue_title, tt.issue_summary, st.name AS status, pt.name AS priority, tt.date FROM ticket_table AS tt JOIN department_table AS dt ON tt.department=dt._id JOIN status_table AS st ON tt.status=st._id JOIN priority_table AS pt ON tt.priority=pt._id;';
+    'SELECT tt._id, tt.first_name, dt.name AS department, tt.issue_title, tt.issue_summary, st.name AS status, pt.name AS priority, tt.date FROM ticket_table AS tt JOIN department_table AS dt ON tt.department_id= dt._id JOIN status_table AS st ON tt.status_id=st._id JOIN priority_table AS pt ON tt.priority_id=pt._id;';
 
   db.query(query)
     .then((response) => {
@@ -33,11 +33,12 @@ ticketController.addTicket = (req, res, next) => {
     issue_summary,
     priority,
   } = req.body;
+
   const status = 1;
   const date = new Date();
 
   const query =
-    'INSERT INTO ticket_table (first_name, department, issue_title, issue_summary, status, priority, date) VALUES ($1, $2, $3, $4, $5, $6, $7);';
+    'INSERT INTO ticket_table (first_name, department_id, issue_title, issue_summary, status_id, priority_id, date) VALUES ($1, $2, $3, $4, $5, $6, $7);';
   const values = [
     first_name,
     department,
@@ -49,12 +50,12 @@ ticketController.addTicket = (req, res, next) => {
   ];
 
   db.query(query, values)
-    .then((data) => {
-      next();
+    .then(data => {
+      return next();
     })
     .catch((err) => {
       return next({
-        log: `ticketController.addTicket: ERROR: ${err}`,
+        log: `ticketController.addTicket: ERROR: THIS IS OUR ERRORRRRRRRR ${err}`,
         message: {
           err: 'ticketController.addTicket: ERROR: Check server logs for details',
         },
@@ -66,13 +67,14 @@ ticketController.removeTicket = (req, res, next) => {
   const ticketId = req.body._id;
   const thisQuery = 'DELETE FROM ticket_table WHERE _id = $1';
   const values = [ticketId];
-  console.log('REQ BODY ID:', req.body._id)
+  // console.log('REQ BODY ID aka ticketId: ', req.body._id)
   db.query(thisQuery, values)
-    .then((data) => {
-      next();
+    .then(data => {
+      // console.log('res IS: ', data)
+      return next();
     })
     .catch((err) => {
-      next({
+      return next({
         log: `ticketController.removeTicket: ERROR: ${err}`,
         message: {
           err: 'ticketController.removeTicket: ERROR: Check server logs for details',
@@ -80,4 +82,27 @@ ticketController.removeTicket = (req, res, next) => {
       });
     });
 };
+
+// NOTE: Redone by Leo - might have errors
+ticketController.updatePriority = (req, res, next) => {
+  const {_id, priority_id} = req.body;
+  const values = [_id, priority_id];
+  console.log(`getting into updatePriority`)
+  const thisQuery = 'UPDATE ticket_table SET priority_id=$2 WHERE _id=$1';
+  db.query(thisQuery, values)
+  .then((data) => {
+    res.locals.priority = data.rows[0]
+    next();
+  })
+  .catch((err) => {
+    next({
+      log: `ticketController.updatePriority: ERROR: ${err}`,
+      message: {
+        err: 'ticketController.updatePriority: ERROR: Check server logs for details',
+      },
+    })
+  })
+};
+
+
 module.exports = ticketController;

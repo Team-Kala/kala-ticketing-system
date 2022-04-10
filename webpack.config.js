@@ -5,7 +5,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
   filename: './index.html',
 });
 module.exports = {
-  entry: path.join(__dirname, 'src/main.js'),
+  entry: ['regenerator-runtime/runtime', path.join(__dirname, 'src/main.js')],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'build.js',

@@ -1,21 +1,45 @@
 import ReactDOM from 'react-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Header from './containers/headerContainer';
+// import Header from './containers/headerContainer';
+import LogoHeader from './components/logoHeader';
 import TicketContainer from './containers/ticketsContainer';
-import TicketForm from './components/modal';
+import TicketForm from './components/TicketForm';
+import SignUp from './components/SignUp';
 import './style.css'
 
 
 const App = () => {
-  return ( 
-    <div>
-    <Header />
+  const [darkMode, setDarkMode] = useState(true)
+
+  const darkModeHandler = () => {
+    setDarkMode(!darkMode)
+  }
+
+  const renderDark = <div style={{ backgroundColor: "#212121", color: "#eee" }} >
+    <LogoHeader darkSwitch={darkModeHandler} colors={{ background: "#677569", btnOutline: '#eeee', btnBorder: '#eeee'}}/>
     <Routes>
-      <Route exact path='/' element={<TicketContainer/>}></Route>
-      <Route exact path='/form' element={<TicketForm/>}></Route>
+      <Route path='/' element={<TicketContainer colors={{ card: "#3b3b3b", font: "#cfcfcf", titleFont: "#FAFAFA"}} />}></Route>
+      <Route path='/form' element={<TicketForm />}></Route>
     </Routes>
-    </div>
+  </div>
+
+  const renderLight = <div>
+    <LogoHeader darkSwitch={darkModeHandler} colors={{background: "#ACC4B0"}}/>
+    <Routes>
+      <Route path='/' element={<TicketContainer colors={{ card: "#E1E1E1", font: "#4b4b4b", titleFont: "#212121" }}/>}></Route>
+      <Route path='/form' element={<TicketForm />}></Route>
+    </Routes>
+  </div>
+
+  return (
+    <div>
+      {/* <div style={{ backgroundColor: "#212121", color: "#eee" }} >
+      <LogoHeader darkSwitch={darkModeHandler} colors={{ background: "#677569", btnOutline: '#eeee', btnBorder: '#eeee' }} />
+      <SignUp />
+      </div> */}
+      {darkMode ? renderDark : renderLight}
+      </div>
   )
 }
 

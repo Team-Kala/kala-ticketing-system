@@ -4,7 +4,7 @@
   "description": "A CRUD app for organizing bug tickets",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --verbose",
+    "test": "NODE_ENV=test jest --verbose --detectOpenHandles",
     "start": "NODE_ENV=production node server/server.js",
     "build": "webpack --mode production",
     "dev": "NODE_ENV=development nodemon server/server.js --open & NODE_ENV=development webpack-dev-server --open --hot"
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Team-Kala/red-lipped-bat-fish#readme",
   "jest": {
+    "verbose": true,
     "globalSetup": "./jest-setup.js",
     "globalTeardown": "./jest-teardown.js",
     "testEnvironment": "jest-environment-jsdom",
@@ -51,6 +52,9 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.4.3",
     "@testing-library/jest-dom": "^5.16.2",
     "chart.js": "^3.7.1",
     "cors": "^2.8.5",
@@ -59,6 +63,7 @@
     "jest-environment-jsdom": "^27.5.1",
     "pg": "^8.7.3",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
