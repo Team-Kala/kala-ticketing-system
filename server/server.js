@@ -3,6 +3,8 @@ require('dotenv').config();
 const cors = require('cors');
 const path = require('path');
 
+// import routers 
+const apiRouter = require('./routes/api.js');
 
 // initialize application
 const app = express();
@@ -30,6 +32,9 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, './src/index.html'));
   });
 }
+
+// set up router
+app.use('/api', apiRouter);
 
 // catch-all route handler for any requests to an unknown route
 app.use('/*', (req, res) => res.sendStatus(404));
